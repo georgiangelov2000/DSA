@@ -44,7 +44,6 @@ class Queue {
     }
 }
 
-// Пример за използване
 $queue = new Queue();
 
 $queue->enqueue(1);
@@ -61,3 +60,52 @@ echo "Изваден елемент: " . $queue->dequeue() . "\n";
 
 echo "Елементите в опашката след изваждане: ";
 $queue->display();
+
+
+class Queue {
+    private $elements = array();
+
+    public function enqueue($element) {
+        array_push($this->elements, $element);
+    }
+
+    public function dequeue() {
+        if (!$this->isEmpty()) {
+            return array_shift($this->elements);
+        } else {
+            throw new UnderflowException("Опашката е празна.");
+        }
+    }
+
+    public function isEmpty() {
+        return empty($this->elements);
+    }
+
+    public function size() {
+        return count($this->elements);
+    }
+
+    public function peek() {
+        if (!$this->isEmpty()) {
+            return $this->elements[0];
+        } else {
+            throw new UnderflowException("Опашката е празна.");
+        }
+    }
+}
+
+$queue = new Queue();
+
+$queue->enqueue("Първи елемент");
+$queue->enqueue("Втори елемент");
+$queue->enqueue("Трети елемент");
+
+echo "Първи елемент: " . $queue->dequeue() . "\n";
+echo "Втори елемент: " . $queue->dequeue() . "\n";
+echo "Трети елемент: " . $queue->dequeue() . "\n";
+
+try {
+    $queue->dequeue();
+} catch (UnderflowException $e) {
+    echo $e->getMessage() . "\n";
+}

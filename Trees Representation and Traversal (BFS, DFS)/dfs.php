@@ -46,14 +46,21 @@ $party = [
     'F' => ['C']
 ];
 
-function dfs_recursive($graph, $node, &$visited) {
+function dfs_recursive($graph, $node, &$visited, $target) {
     if (!in_array($node, $visited)) {
         echo "Посещаваме: $node\n";  // Посещаваме текущия възел
         $visited[] = $node;  // Маркираме възела като посетен
 
+        if ($node === $target) {
+            echo "Намерихме приятеля си: $target!\n";
+            return true;
+        }
+
         // Рекурсивно обхождаме съседите на текущия възел
         foreach ($graph[$node] as $neighbor) {
-            dfs_recursive($graph, $neighbor, $visited);
+            if (dfs_recursive($graph, $neighbor, $visited, $target)) {
+                return true;  // Прекратяваме рекурсията, ако целевият възел е намерен
+            }
         }
     }
 }
@@ -61,4 +68,4 @@ function dfs_recursive($graph, $node, &$visited) {
 // Начална точка
 $visited = [];
 $startNode = 'A';
-dfs_recursive($party, $startNode, $visited);
+dfs_recursive($party, $startNode, $visited, 'E');

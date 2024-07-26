@@ -25,8 +25,22 @@ class Node {
         return null;
     }
 
-    public function swap() {
-        
+    public function swapNodes($el1,$el2) {
+        $node1 = $this->bfs($el1);
+        $node2 = $this->bfs($el2);
+
+        if ($node1 === null || $node2 === null) {
+            throw new InvalidArgumentException("One or both nodes not found.");
+        }
+
+        $index1 = array_search($node1, $this->children);
+        $index2 = array_search($node2, $this->children);
+
+        if ($index1 !== false && $index2 !== false) {
+            $this->children[$index1] = $node2;
+            $this->children[$index2] = $node1;
+        }
+
     }
 
     public function bfs($el = null){
@@ -43,7 +57,6 @@ class Node {
             foreach ($current->children as $key => $node) {
                 $this->enqueue($queue,$node);
             }
-
         }
     }
 
@@ -92,10 +105,10 @@ $child3->add($grandChild8);
 $child3->add($grandChild9);
 
 
+$node->swapNodes(1,3);
+// $node->bfs();
+// $node->orderDfs($node);
 
-$node->bfs();
-$node->orderDfs($node);
-
-// $newNode = new Node(4);
-// $node->addSpecificPosition(1,$newNode);
-var_dump($node->removeNode(5));
+// // $newNode = new Node(4);
+// // $node->addSpecificPosition(1,$newNode);
+// var_dump($node->removeNode(5));

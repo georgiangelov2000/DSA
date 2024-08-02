@@ -153,7 +153,7 @@ class BinaryHeap {
     }
 
     // Function to delete the root from Heap
-    public function delete($i) {
+    public function delete() {
         //get the last element
         $lastElement = $this->heap[$this->size - 1];
         

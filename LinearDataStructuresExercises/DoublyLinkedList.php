@@ -77,6 +77,77 @@ class DoublyLinkedList {
     public function getCount(){
         return $this->size;
     }
+    public function attachBefore($beforeValue, $element){
+        $newNode = new Node($element);
+        $currentNode = $this->head;
+        while($currentNode->data!= $beforeValue && $currentNode!== null) {
+            $currentNode = $currentNode->next;
+        }
+        if($currentNode === null) {
+            echo "Element not found in Doubly Linked List";
+            return;
+        }
+        if($currentNode->prev === null) {
+            $this->head = $newNode;
+            $newNode->next = $currentNode;
+            $currentNode->prev = $newNode;
+        } else {
+            $newNode->next = $currentNode;
+            $newNode->prev = $currentNode->prev;
+            $currentNode->prev->next = $newNode;
+            $currentNode->prev = $newNode;
+        }
+        $this->size++;
+    }
+    public function getElement($value) {
+        $currentNode = $this->head;
+        echo '$currentNode->data =>'. $currentNode->data;
+        echo "\n";
+        echo $currentNode->data != $value;
+        echo "\n";
+        while($currentNode->data != $value && $currentNode!== null) {
+            $currentNode = $currentNode->next;
+        }
+        echo $currentNode->data;
+        if($currentNode === null) {
+            echo "Element not found in Doubly Linked List";
+            return null;
+        }
+        return $currentNode->data;
+    }
+    public function deleteElement($value){
+        $currentNode = $this->head;
+        while($currentNode->data!= $value && $currentNode!== null) {
+            $currentNode = $currentNode->next;
+        }
+        if($currentNode === null) {
+            echo "Element not found in Doubly Linked List";
+            return;
+        }
+        if($currentNode->prev === null) {
+            $this->head = $currentNode->next;
+        } else {
+            $currentNode->prev->next = $currentNode->next;
+        }
+        if($currentNode->next === null) {
+            $this->last = $currentNode->prev;
+        } else {
+            $currentNode->next->prev = $currentNode->prev;
+        }
+        $this->size--;
+    }
+    public function setValue($oldValue, $newValue) {
+        $currentNode = $this->head;
+        while($currentNode->data!= $oldValue && $currentNode!== null) {
+            $currentNode = $currentNode->next;
+        }
+        if($currentNode === null) {
+            echo "Element not found in Doubly Linked List";
+            return;
+        }
+        $currentNode->data = $newValue;
+    }
+    
 }
 
 $dll = new DoublyLinkedList();
@@ -87,10 +158,11 @@ echo "Add element to Doubly Linked List:" . $dll->addLast(4) . "\n";
 echo "Doubly Linked List size:" . $dll->getCount() . "\n";
 echo "Get First:" . $dll->getFirst() . "\n";
 echo "Get Last:" . $dll->getLast() . "\n";
-
+// $dll->attachBefore(4,7);
 // $dll->removeFirst(4);
 // $dll->removeLast(4);
-
+// $dll->getElement(2);
+$dll->deleteElement(4);
 $currentNode = $dll->head;
 while($currentNode !== null) {
     echo $currentNode->data;

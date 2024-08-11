@@ -1,34 +1,52 @@
 <?php
-// PHP program for implementation 
-// of selection sort 
-function selection_sort(&$arr, $n) 
+function generateRandomArray($size) {
+    $arr = [];
+    for ($i = 0; $i < $size; $i++) {
+        $arr[] = rand(0, $size);
+    }
+    return $arr;
+}
+
+
+function selection_sort(&$arr, $n, &$comparisons, &$swaps) 
 {
+    $comparisons = 0;
+    $swaps = 0;
+
     for($i = 0; $i < $n ; $i++)
     {
         $low = $i;
         for($j = $i + 1; $j < $n ; $j++)
         {
+            $comparisons++;
             if ($arr[$j] < $arr[$low])
             {
                 $low = $j;
             }
         }
         
-        // swap the minimum value to $ith node
         if ($arr[$i] > $arr[$low])
         {
             $tmp = $arr[$i];
             $arr[$i] = $arr[$low];
             $arr[$low] = $tmp;
+            $swaps++;
         }
     }
 }
 
-// Driver Code
-$arr = array(64, 25, 12, 22, 11);
-$len = count($arr);
-selection_sort($arr, $len);
-echo "Sorted array : \n"; 
+$size = 10000;
+$randomArray = generateRandomArray($size);
+$comparisons = 0;
+$swaps = 0;
 
-for ($i = 0; $i < $len; $i++) 
-    echo $arr[$i] . " "; 
+$len = count($randomArray);
+$start_time = microtime(true);
+selection_sort($randomArray, $len, $comparisons, $swaps);
+$end_time = microtime(true);
+$execution_time = $end_time - $start_time;
+echo "Selection Sort:\n";
+echo "Comparisons: $comparisons\n";
+echo "Swaps: $swaps\n";
+echo "Execution time: $execution_time\n";
+// echo "Sorted array: " . implode(" ", $randomArray) . "\n";

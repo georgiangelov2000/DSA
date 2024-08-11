@@ -1,38 +1,65 @@
 <?php
-// PHP program for insertion sort
+function generateRandomArray($size) {
+    $arr = [];
+    for ($i = 0; $i < $size; $i++) {
+        $arr[] = rand(0, $size);
+    }
+    return $arr;
+}
+// function insertionSort(&$arr, $n, &$comparisons, &$swaps)
+// {
+//     for ($i = 1; $i < $n; $i++)
+//     {
+//         $key = $arr[$i];
+//         $j = $i - 1;
 
-// Function to sort an array using insertion sort
-function insertionSort(&$arr, $n)
+//         $comparisons++;
+//         while ($j >= 0 && $arr[$j] > $key)
+//         {
+//             $arr[$j + 1] = $arr[$j];
+//             $swaps++;
+//             $j = $j - 1;
+//         }
+        
+//         $arr[$j + 1] = $key;
+//     }
+// }
+
+function insertionSort(&$arr, $n, &$comparisons, &$swaps)
 {
     for ($i = 1; $i < $n; $i++)
     {
         $key = $arr[$i];
         $j = $i - 1;
 
-        // Move elements of arr[0..i-1],
-        // that are greater than key, to 
-        // one position ahead of their 
-        // current position
-        while ($j >= 0 && $arr[$j] > $key)
-        {
-            $arr[$j + 1] = $arr[$j];
-            $j = $j - 1;
+        while ($j >= 0) {
+            $comparisons++;
+            if ($arr[$j] > $key) {
+                $arr[$j + 1] = $arr[$j];
+                $swaps++;
+                $j--;
+            } else {
+                break;
+            }
         }
         
         $arr[$j + 1] = $key;
+        if ($j + 1 != $i) {
+            $swaps++;
+        }
     }
 }
 
-// A utility function to print an array of size n
-function printArray(&$arr, $n)
-{
-    for ($i = 0; $i < $n; $i++)
-        echo $arr[$i] . " ";
-    echo "\n";
-}
-
-// Driver Code
-$arr = array(12, 11, 13, 5, 6);
-$n = sizeof($arr);
-insertionSort($arr, $n);
-printArray($arr, $n);
+$size = 10000;
+$start_time = microtime(true);
+$randomArray = generateRandomArray($size);
+$end_time = microtime(true);
+$execution_time = $end_time - $start_time;
+$comparisons = 0;
+$swaps = 0;
+$n = sizeof($randomArray);
+insertionSort($randomArray, $n, $comparisons, $swaps);
+echo "Insertion Sort:\n";
+echo "Comparisons: $comparisons\n";
+echo "Swaps: $swaps\n";
+echo "Execution time: $execution_time\n";

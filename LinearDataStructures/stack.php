@@ -17,7 +17,9 @@ class Stack {
         if ($this->isEmpty()) {
             return "Стекът е празен";
         }
-        return $this->stack[--$this->size];
+        $element = $this->stack[$this->size - 1];
+        $this->stack = array_slice($this->stack, 0 ,--$this->size);
+        return $element;
     }
 
     public function peek() {

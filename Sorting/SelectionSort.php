@@ -39,7 +39,7 @@ $size = 10000;
 $randomArray = generateRandomArray($size);
 $comparisons = 0;
 $swaps = 0;
-
+$randomArray = [9,5,4,3,6,7];
 $len = count($randomArray);
 $start_time = microtime(true);
 selection_sort($randomArray, $len, $comparisons, $swaps);

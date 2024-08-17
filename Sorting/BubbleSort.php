@@ -34,6 +34,7 @@ $size = 10000;
 $randomArray = generateRandomArray($size);
 $comparisons = 0;
 $swaps = 0;
+$randomArray = [2,1,4,3];
 $start_time = microtime(true);
 bubbleSort($randomArray, $comparisons, $swaps);
 $end_time = microtime(true);

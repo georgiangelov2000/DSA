@@ -44,15 +44,13 @@ function insertionSort(&$arr, $n, &$comparisons, &$swaps)
         }
         
         $arr[$j + 1] = $key;
-        if ($j + 1 != $i) {
-            $swaps++;
-        }
     }
 }
 
 $size = 10000;
 $start_time = microtime(true);
 $randomArray = generateRandomArray($size);
+$randomArray = [9,7,6,15,17,5,10,1];
 $end_time = microtime(true);
 $execution_time = $end_time - $start_time;
 $comparisons = 0;
@@ -63,3 +61,4 @@ echo "Insertion Sort:\n";
 echo "Comparisons: $comparisons\n";
 echo "Swaps: $swaps\n";
 echo "Execution time: $execution_time\n";
+echo "Sorted array: " . implode(" ", $randomArray) . "\n";

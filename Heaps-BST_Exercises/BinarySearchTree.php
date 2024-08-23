@@ -45,7 +45,7 @@ class BinarySearchTree
 
     public function getSuccessor($curr) {
         $curr = $curr->right;
-        while($curr && $curr->left!= null) {
+        while($curr !== null && $curr->left!= null) {
             $curr = $curr->left;
         }
         return $curr;

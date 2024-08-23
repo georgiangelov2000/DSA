@@ -43,6 +43,38 @@ class BinarySearchTree
         return $root;
     }
 
+    public function getSuccessor($curr) {
+        $curr = $curr->right;
+        while($curr && $curr->left!= null) {
+            $curr = $curr->left;
+        }
+        return $curr;
+    }
+
+    public function delete ($root, $val){
+        if($root === null) {
+            return $root;
+        }
+
+        if($root->data > $val) {
+            $root->left = $this->delete($root->left,$val);
+        } else if($root->data < $val) {
+            $root->right = $this->delete($root->right,$val);
+        } else {
+            if($root->left === null) {
+                return $root->right;
+            }
+            if($root->right === null) {
+                return $root->left;
+            }
+            
+            $succ = $this->getSuccessor($root);
+            $root->data = $succ->data;
+            $root->right = $this->delete($root->right, $succ->data);
+        }
+        return $root;
+    }
+
     public function contains($root,$val) {
         if($root === null) {
             echo "Value: {$val} is  not found \n";
@@ -127,6 +159,10 @@ $bst->insert($bst->root, 3);
 $bst->insert($bst->root, 7);
 $bst->insert($bst->root, 19);
 $bst->insert($bst->root, 25);
+$bst->insert($bst->root, 21);
+
+// Delete a node from BST
+$bst->delete($bst->root, 3);
 // $bst->contains($bst->root,66666);
 // echo $bst->bs($bst->root,5);
 $leftSubtree = $bst->getLeft($bst->root);

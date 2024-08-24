@@ -1,57 +1,57 @@
 <?php
 //First Example
-class Queue {
-    private $queue;
-    private $size;
+// class Queue {
+//     private $queue;
+//     private $size;
 
-    public function __construct() {
-        $this->queue = array();
-        $this->size = 0;
-    }
+//     public function __construct() {
+//         $this->queue = array();
+//         $this->size = 0;
+//     }
 
-    public function enqueue($element) {
-        $this->queue[$this->size++] = $element;
-    }
+//     public function enqueue($element) {
+//         $this->queue[$this->size++] = $element;
+//     }
 
-    public function dequeue() {
-        if ($this->isEmpty()) {
-            return "Опашката е празна";
-        }
-        $element = $this->queue[0];
-        for ($i = 0; $i < $this->size - 1; $i++) {
-            $this->queue[$i] = $this->queue[$i + 1];
-        }
-        unset($this->queue[--$this->size]);
-        return $element;
-    }
+//     public function dequeue() {
+//         if ($this->isEmpty()) {
+//             return "Опашката е празна";
+//         }
+//         $element = $this->queue[0];
+//         for ($i = 0; $i < $this->size - 1; $i++) {
+//             $this->queue[$i] = $this->queue[$i + 1];
+//         }
+//         unset($this->queue[--$this->size]);
+//         return $element;
+//     }
 
-    public function peek() {
-        if ($this->isEmpty()) {
-            return "Опашката е празна";
-        }
-        return $this->queue[0];
-    }
+//     public function peek() {
+//         if ($this->isEmpty()) {
+//             return "Опашката е празна";
+//         }
+//         return $this->queue[0];
+//     }
 
-    public function isEmpty() {
-        return $this->size == 0;
-    }
+//     public function isEmpty() {
+//         return $this->size == 0;
+//     }
 
-    public function display() {
-        for ($i = 0; $i < $this->size; $i++) {
-            echo $this->queue[$i] . " ";
-        }
-        echo "\n";
-    }
+//     public function display() {
+//         for ($i = 0; $i < $this->size; $i++) {
+//             echo $this->queue[$i] . " ";
+//         }
+//         echo "\n";
+//     }
 
-    public function search($element) {
-        for ($i = 0; $i < $this->size; $i++) {
-            if ($this->queue[$i] == $element) {
-                return $i; // Връща индекса на елемента
-            }
-        }
-        return -1; // Елементът не е намерен
-    }
-}
+//     public function search($element) {
+//         for ($i = 0; $i < $this->size; $i++) {
+//             if ($this->queue[$i] == $element) {
+//                 return $i; // Връща индекса на елемента
+//             }
+//         }
+//         return -1; // Елементът не е намерен
+//     }
+// }
 
 // $queue = new Queue();
 

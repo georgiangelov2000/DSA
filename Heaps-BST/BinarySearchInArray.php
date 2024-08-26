@@ -77,12 +77,41 @@ function deleteElement($arr,$n,$key) {
     return $n;
 }
 
+function binary_search_insert_position($arr, $element) {
+    $low = 0;
+    $high = count($arr) - 1;
+
+    while ($low <= $high) {
+        $mid = intval(($low + $high) / 2);
+
+        if ($arr[$mid] == $element) {
+            return $mid; // Елементът вече съществува, връщаме текущата позиция
+        } elseif ($arr[$mid] < $element) {
+            $low = $mid + 1;
+        } else {
+            $high = $mid - 1;
+        }
+    }
+
+    return $low; // Връщаме позицията за вмъкване
+}
+function insert_element(&$arr, $element) {
+    $position = binary_search_insert_position($arr, $element);
+    array_splice($arr, $position, 0, $element);
+}
+
+$sortedArray = [10, 20, 30, 40, 60, 70];
+$elementToInsert = 50;
+
+insert_element($sortedArray, $elementToInsert);
+
+print_r($sortedArray);
 
 // Deletion Binary Search tree Recursively
-$arr = array(12,16,20,40,50,70);
-$n = count($arr);
-$x = 16;
-deleteElement($arr,$n,$x);
+// $arr = array(12,16,20,40,50,70);
+// $n = count($arr);
+// $x = 16;
+// deleteElement($arr,$n,$x);
 
 // Insertion Binary Search tree
 // $arr = array(12,16,20,40,50,70);

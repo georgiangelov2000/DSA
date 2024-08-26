@@ -100,12 +100,12 @@ function insert_element(&$arr, $element) {
     array_splice($arr, $position, 0, $element);
 }
 
-$sortedArray = [10, 20, 30, 40, 60, 70];
-$elementToInsert = 50;
+// $sortedArray = [10, 20, 30, 40, 60, 70];
+// $elementToInsert = 50;
 
-insert_element($sortedArray, $elementToInsert);
+// insert_element($sortedArray, $elementToInsert);
 
-print_r($sortedArray);
+// print_r($sortedArray);
 
 // Deletion Binary Search tree Recursively
 // $arr = array(12,16,20,40,50,70);
@@ -114,10 +114,10 @@ print_r($sortedArray);
 // deleteElement($arr,$n,$x);
 
 // Insertion Binary Search tree
-// $arr = array(12,16,20,40,50,70);
-// $n = count($arr);
-// $x = 25;
-// insertedSorted($arr,$n,$x);
+$arr = array(12,16,20,40,50,70);
+$n = count($arr);
+$x = 25;
+insertedSorted($arr,$n,$x);
 
 // Binary search iterative
 // $arr = array(2, 3, 4, 10, 40);
